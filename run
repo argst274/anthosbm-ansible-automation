@@ -7,6 +7,8 @@ echo ""
 
 OPTIONS=(
   "Initialise  - Ansible Galaxy Install"
+  "Install     - Google Cloud SDK locally"
+  "Initialise  - Google Cloud Login"
   "Install     - Create Anthos Workstation"
   "Install     - Create Anthos Cluster"
 )
@@ -17,8 +19,20 @@ do
   case $OPT in
 
     "Initialise  - Ansible Galaxy Install")
-      pip install requests google-auth
-      ansible-galaxy collection install --force-with-deps -r vars/galaxy-requirements.yml
+      pip3 install requests google-auth
+      ansible-galaxy collection install -r vars/galaxy-requirements.yml
+      ;;
+
+    "Install     - Google Cloud SDK locally")
+      ansible-playbook install-google-cloud-sdk.yml
+      ;;
+
+    "Initialise  - Google Cloud Login")
+      gcloud auth login --update-adc
+      echo "Enter your Anthos project ID"
+      read projectid
+      gcloud config set project $projectid
+      gcloud config list
       ;;
 
     "Install     - Create Anthos Workstation")

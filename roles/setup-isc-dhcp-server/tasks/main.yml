@@ -1,0 +1,9 @@
+---
+
+- name: Install isc-dhcp-server [Debian / Ubuntu]
+  apt:
+    pkg:
+      - isc-dhcp-server
+    state: present
+    update_cache: 'yes'
+  become: yes
