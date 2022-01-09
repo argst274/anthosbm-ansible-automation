@@ -16,15 +16,15 @@
 #--------------------------------------------------------------------
 # Target Hosts
 #--------------------------------------------------------------------
-target_workstation: anthos-workstation
+target_workstation: anthos_workstation
 target_nodes: anthos_cluster
 
 #--------------------------------------------------------------------
 # Google Cloud Project Configuration
 #--------------------------------------------------------------------
-gcp_project_id: "test-anthos-edge-project"
+gcp_project_id: "anthos-demo-316407"
 
-ansible_service_account: "ansible-runner"
+ansible_service_account: "ansible-runner" #Length between 6-30
 
 anthos_container_registry_service_account: "anthos-container-registry"
 anthos_connect_agent_service_account: "anthos-connect-agent"
@@ -36,7 +36,7 @@ secret_manager_locations: "australia-southeast1,australia-southeast2"
 #--------------------------------------------------------------------
 # "bmctl" Configuration
 #--------------------------------------------------------------------
-bmctl_version: "1.8.3"
+bmctl_version: "1.9.0"
 
 login_user: "anthos"
 
@@ -52,9 +52,9 @@ bmctl_workspace_dir: "{{ ansible_user_dir }}/bmctl-workspace"
 # Cluster profile. This can be:
 #   1) default: The default profile has limited resource requirements.
 #   2) edge:    The edge profile minimizes the resource consumption of Anthos clusters on bare metal. It is only available for standalone clusters.
-cluster_name: "test-anthos-edge"
+cluster_name: "nuc-anthos-demo"
 cluster_type: "standalone"
-cluster_profile: "edge"
+cluster_profile: "default"
 cluster_location: "australia-southeast1"
 
 # Container Runtime specifies which container runtime to use for scheduling containers on nodes.

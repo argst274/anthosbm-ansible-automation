@@ -19,7 +19,7 @@
   ansible.builtin.shell:
     cmd: |
       set -o pipefail
-      export GOOGLE_APPLICATION_CREDENTIALS="{{ gcp_keys_dir }}/{{ ansible_service_account }}.json"
+#      export GOOGLE_APPLICATION_CREDENTIALS="{{ gcp_keys_dir }}/{{ ansible_service_account }}.json"
       bmctl create cluster -c "{{ cluster_name }}" --quiet
   args:
     executable: /bin/bash

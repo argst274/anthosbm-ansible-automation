@@ -21,6 +21,7 @@
 
 - name: Prepare the Google Cloud Project for Anthos
   hosts: localhost
+  remote_user: "{{ ansible_service_account }}"
   vars_files:
     - vars/anthos.yml
   roles:
@@ -32,14 +33,16 @@
 
 - name: Prepare the Anthos Workstation
   hosts: "{{ target_workstation }}"
+  remote_user: "{{ ansible_service_account }}"
   vars_files:
     - vars/anthos.yml
     - vars/timesync.yml
   roles:
     - role: system-package-update
-    - role: disable-firewall
+#    - role: disable-firewall
     - role: setup-timesync
     - role: setup-login-user
+    - role: setup-isc-dhcp-server
 
 
 - name: Setup the Anthos Workstation as "login_user"
