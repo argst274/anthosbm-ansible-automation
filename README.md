@@ -21,7 +21,7 @@ EOF
 
 3. Create ssh key pair and copy public key to box1
 ```
-ssh-copy-id -i ~/.ssh/id_ed25519.pub anisble-runner@<box1-ip>
+ssh-copy-id -i ~/.ssh/id_ed25519.pub ansible-runner@<box1-ip>
 ```
 3. Connect to your local wifi and configure static IP for your pysical ethernet  (10.1.1.10)
 
@@ -31,6 +31,8 @@ ssh-copy-id -i ~/.ssh/id_ed25519.pub anisble-runner@<box1-ip>
 ```
 ./run
 ```
+
+The following digram shows my environment
 
 ```ditaa {cmd=true args=["-E"]}
 +--------------------------+    +-------------------------------+
@@ -48,7 +50,7 @@ ssh-copy-id -i ~/.ssh/id_ed25519.pub anisble-runner@<box1-ip>
                            |                                        |
            +---------------v---------------+       +----------------v--------------+
            |Ubuntu 20.10 Server            |       |Ubuntu 20.10 Server            |
-           |Box2/Anthos Cluster            |       |Box2/Anthos Cluster            |
+           |Box2/Anthos Cluster            |       |Box3/Anthos Cluster            |
            |eth:  10.1.1.11 (DHCP)         |       |eth:  10.1.1.12 (DHCP)         |
            |                               |       |                               |
            +-------------------------------+       +-------------------------------+
