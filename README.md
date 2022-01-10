@@ -2,6 +2,8 @@
 
 #Shout out to Matthew Winter whos code set the foundation for this deployment
 
+#This demo is only built for Ubuntu hosts
+
 
 1. Install latest version of Ansible on your Control Machine. 
 ```
@@ -19,7 +21,7 @@ EOF
 
 3. Create ssh key pair and copy public key to box1
 ```
-ssh-copy-id -i ~/.ssh/id_ed25519.pub anisble-runner@<box2-ip>
+ssh-copy-id -i ~/.ssh/id_ed25519.pub anisble-runner@<box1-ip>
 ```
 3. Connect to your local wifi and configure static IP for your pysical ethernet  (10.1.1.10)
 
