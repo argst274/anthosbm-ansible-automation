@@ -12,6 +12,7 @@ pip3 install ansible
 2. Install ubunutu desktop on box1 enable ssh and add the ansible runner account
 ```
 sudo apt update -y  && sudo apt install openssh-server -y
+sudo ufw allow openssh
 sudo adduser ansible-runner
 sudo rm -f /etc/sudoers.d/*
 cat <<EOF | sudo tee /etc/sudoers.d/00-ansible-runner
