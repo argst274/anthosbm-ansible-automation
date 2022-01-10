@@ -31,3 +31,25 @@ ssh-copy-id -i ~/.ssh/id_ed25519.pub anisble-runner@<box1-ip>
 ```
 ./run
 ```
+
+```ditaa {cmd=true args=["-E"]}
++--------------------------+    +-------------------------------+
+| Chromebook               |    |Ubuntu 20.10 Desktop           |
+| Ansible Control Machine  +--->|Box1/Anthos Workstation/Proxy  |
+| wlan: 192.168.1.13       |    |wlan: 192.168.1.13 (Static IP) |
+|                          |    |eth:  10.1.1.10                |
++--------------------------+    +---------------+---------------+
+                                                |
+                                         +------v-----+
+                                         | eth switch |
+                           +-------------+------------+-------------+
+                           |                                        |
+                           |                                        |
+                           |                                        |
+           +---------------v---------------+       +----------------v--------------+
+           |Ubuntu 20.10 Server            |       |Ubuntu 20.10 Server            |
+           |Box2/Anthos Cluster            |       |Box2/Anthos Cluster            |
+           |eth:  10.1.1.11 (DHCP)         |       |eth:  10.1.1.12 (DHCP)         |
+           |                               |       |                               |
+           +-------------------------------+       +-------------------------------+
+  ```
