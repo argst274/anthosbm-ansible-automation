@@ -24,3 +24,43 @@
   with_items:
     - isc-dhcp-server
 
+- name: Define DHCP interface
+  ansible.builtin.lineinfile:
+    path: /etc/default/isc-dhcp-server
+    regexp: 'INTERFACESv4=.*'
+    line: 'INTERFACESv4="{{ eth_interface }}"'
+    state: present
+
+- name: Define DHCP domain
+  ansible.builtin.lineinfile:
+    path: /etc/dhcp/dhcpd.conf
+    regexp: '^((?!#)option domain-name .*)'
+    line: 'option domain-name "{{ domain_name }}";'
+    state: present
+
+- name: Define DHCP name servers
+  ansible.builtin.lineinfile:
+    path: /etc/dhcp/dhcpd.conf
+    regexp: '^((?!#)option domain-name-servers .*)'
+    line: 'option domain-name-servers 8.8.8.8, 8.8.4.4;'
+    state: present
+
+- name: Define DHCP range and static IPs
+  ansible.builtin.blockinfile:
+    dest: /etc/dhcp/dhcpd.conf
+    block: "{{ lookup('template', 'roles/setup-isc-dhcp-server/templates/dhcpd_conf.j2') }}"
+    backup: yes
+
+- name: Allow all access to dhcp udp port 67
+  community.general.ufw:
+    rule: allow
+    port: '67'
+    proto: udp
+    state: enabled
+
+- name: Start isc-dhcp-server Service
+  ansible.builtin.systemd:
+    name: isc-dhcp-server
+    enabled: yes
+    state: started
+  become: true

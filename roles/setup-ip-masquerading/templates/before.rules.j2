@@ -1,0 +1,10 @@
+#jinja2: trim_blocks: "true", lstrip_blocks: "false"
+#NAT table rules
+*nat
+:POSTROUTING ACCEPT [0:0]
+
+# Forward traffic through eth0 - Change to public network interface
+-A POSTROUTING -s {{ cidr }} -o {{ wlan_interface }} -j MASQUERADE
+
+# don't delete the 'COMMIT' line or these rules won't be processed
+COMMIT

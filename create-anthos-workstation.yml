@@ -44,7 +44,7 @@
     - role: setup-timesync
     - role: setup-login-user
     - role: setup-isc-dhcp-server
-
+    - role: setup-ip-masquerading
 
 - name: Setup the Anthos Workstation as "login_user"
   hosts: "{{ target_workstation }}"

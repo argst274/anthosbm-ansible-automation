@@ -17,4 +17,3 @@
     file: 'setup-isc-dhcp-server-{{ ansible_os_family | lower }}.yml'
     apply:
       become: true
-

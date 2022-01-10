@@ -1,0 +1,13 @@
+#jinja2: trim_blocks: "true", lstrip_blocks: "false"
+subnet {{ subnet }} netmask {{ netmask }} {
+  range {{ dhcp_range }};
+  option routers {{ routers }};
+  option subnet-mask {{ netmask }};
+  host box2 {
+    hardware ethernet {{ box2_hardware_ethernet }};
+    fixed-address {{ box2_fixed_address }};
+  }
+  host box3 {
+    hardware ethernet {{ box3_hardware_ethernet }};
+    fixed-address {{ box3_fixed_address  }};
+}

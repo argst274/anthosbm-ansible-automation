@@ -12,14 +12,8 @@
 
 ---
 
-- name: Remove Package Dependencies No Longer Required [RedHat / CentOS]
-  ansible.builtin.dnf:
-    autoremove: yes
-
-- name: Install isc-dhcp-server [RedHat / CentOS]
-  ansible.builtin.dnf:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - isc-dhcp-server
-
+- name: Setup IP masquerading for OS Family
+  ansible.builtin.include_tasks:
+    file: 'setup-ip-masquerading-{{ ansible_os_family | lower }}.yml'
+    apply:
+      become: true
