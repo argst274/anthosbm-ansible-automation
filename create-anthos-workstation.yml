@@ -37,6 +37,7 @@
   vars_files:
     - vars/anthos.yml
     - vars/timesync.yml
+    - vars/proxy.yml
   roles:
     - role: system-package-update
 #    - role: disable-firewall
