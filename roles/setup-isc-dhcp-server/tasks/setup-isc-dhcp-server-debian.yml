@@ -12,9 +12,15 @@
 
 ---
 
-- name: Setup isc-dhcp-server for OS Family
-  ansible.builtin.include_tasks:
-    file: 'setup-isc-dhcp-server-{{ ansible_os_family | lower }}.yml'
-    apply:
-      become: true
+- name: Remove Package Dependencies No Longer Required [Debian / Ubuntu]
+  ansible.builtin.apt:
+    autoremove: yes
+
+- name: Install isc-dhcp-server [Debian / Ubuntu]
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - isc-dhcp-server
 
