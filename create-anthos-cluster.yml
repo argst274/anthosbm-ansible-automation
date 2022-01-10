@@ -21,6 +21,7 @@
 
 - name: Prepare the Anthos Cluster Nodes
   hosts: "{{ target_nodes }}"
+  remote_user: "{{ ansible_service_account }}"
   vars_files:
     - vars/anthos.yml
     - vars/timesync.yml
