@@ -24,7 +24,6 @@
   ansible.builtin.shell:
     cmd: |
       set -o pipefail
- #     export GOOGLE_APPLICATION_CREDENTIALS="{{ gcp_keys_dir }}/{{ ansible_service_account }}.json"
       bmctl create config -c "{{ cluster_name }}" --quiet
   args:
     executable: /bin/bash
@@ -43,7 +42,7 @@
 
 - name: Write the "bmctl" Configuration YAML File
   ansible.builtin.template:
-    src: bmctl-config-{{ cluster_name }}.yaml.j2
+    src: bmctl-config.yaml.j2
     dest: "{{ bmctl_workspace_dir }}/{{ cluster_name }}/{{ cluster_name }}.yaml"
     owner: "{{ login_user }}"
     group: "{{ login_user }}"

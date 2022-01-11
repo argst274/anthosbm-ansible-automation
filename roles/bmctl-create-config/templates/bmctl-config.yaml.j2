@@ -17,37 +17,32 @@ metadata:
   namespace: cluster-{{ cluster_name }}
 spec:
   type: {{ cluster_type }}
-  profile: {{ cluster_profile }}
   anthosBareMetalVersion: {{ bmctl_version }}
   gkeConnect:
     projectID: {{ gcp_project_id }}
   controlPlane:
     nodePoolSpec:
       nodes:
-      - address: 10.0.200.2
+        - address: {{ box2_private_address }}
   clusterNetwork:
+    multipleNetworkInterfaces: false
     pods:
       cidrBlocks:
-      - 192.168.0.0/16
+        - 172.16.0.0/16
     services:
       cidrBlocks:
-      - 10.96.0.0/12
+        - 10.96.0.0/20
   loadBalancer:
     mode: bundled
     ports:
       controlPlaneLBPort: 443
     vips:
-      controlPlaneVIP: 10.0.200.3
-      ingressVIP: 10.0.200.4
+      controlPlaneVIP: {{ control_plane_vip }}
+      ingressVIP: {{ ingress_vip }}
     addressPools:
-    - name: ingressPool
-      addresses:
-      - 10.0.200.4-10.0.200.4
-  clusterOperations:
-    projectID: {{ gcp_project_id }}
-    location: {{ cluster_location }}
-    disableCloudAuditLogging: false
-    enableApplication: true
+      - name: lb-address-pool-1
+        addresses:
+          - {{ loadbalancer_address_pool }}
   storage:
     lvpNodeMounts:
       path: /mnt/localpv-disk
@@ -58,9 +53,21 @@ spec:
       numPVUnderSharedPath: 5
   nodeConfig:
     podDensity:
-      maxPodsPerNode: 250
+      maxPodsPerNode: 100
     containerRuntime: {{ container_runtime }}
-  kubevirt:
-    useEmulation: false
+  clusterOperations:
+    projectID: {{ gcp_project_id }}
+    location: {{ cluster_location }}
+    enableApplication: true
   nodeAccess:
-    loginUser: {{ login_user }}
+    loginUser: '{{ login_user }}'
+---
+apiVersion: baremetal.cluster.gke.io/v1
+kind: NodePool
+metadata:
+  name: default-pool
+  namespace: cluster-{{ cluster_name }}
+spec:
+  clusterName: {{ cluster_name }}
+  nodes:
+    - address: {{ box3_private_address }}
