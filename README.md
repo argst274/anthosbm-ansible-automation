@@ -40,8 +40,8 @@ The following digram shows my environment
 +--------------------------+    +-------------------------------+
 | Chromebook               |    |Ubuntu 20.10 Desktop           |
 | Ansible Control Machine  +--->|Box1/Anthos Workstation/Proxy  |
-| wlan: 192.168.1.13       |    |wlan: 192.168.1.13 (Static IP) |
-|                          |    |eth:  10.1.1.10                |
+| wlan: 192.168.1.XX       |    |wlan: 192.168.1.13 (Static)    |
+|                          |    |eth:  10.1.1.10 (Static)       |
 +--------------------------+    +---------------+---------------+
                                                 |
                                          +------v-----+
