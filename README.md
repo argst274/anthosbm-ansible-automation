@@ -19,16 +19,17 @@ cat <<EOF | sudo tee /etc/sudoers.d/00-ansible-runner
 ansible-runner   ALL=(ALL) NOPASSWD:ALL
 EOF
 ```
+3. Install ubunutu server on box2 and box3 enable ssh and add the ansible runner account as above.
 
-3. Create ssh key pair and copy public key to box1
+4. Create ssh key pair and copy public key to target hosts
 ```
-ssh-copy-id -i ~/.ssh/id_ed25519.pub ansible-runner@<box1-ip>
+ssh-copy-id -i ~/.ssh/id_ed25519.pub ansible-runner@<host>
 ```
-3. Connect to your local wifi and configure static IP for your pysical ethernet  (10.1.1.10)
+5. Connect to your local wifi and configure static IP for your pysical ethernet  (10.1.1.10)
 
-4. Update hosts and variables
+6. Update variables
 
-5. Execute run script
+7. Execute run script
 ```
 ./run
 ```
@@ -56,3 +57,6 @@ The following digram shows my environment
            |                               |       |                               |
            +-------------------------------+       +-------------------------------+
   ```
+
+  Troubleshooting
+  - Ensure that constraints/iam.disableServiceAccountKeyCreation policy is not enforced
