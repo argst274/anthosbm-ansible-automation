@@ -5,11 +5,20 @@
 #This demo is only built for Ubuntu hosts
 
 
-1. Install latest version of Ansible on your Control Machine. 
+1. Install the latest version of Ansible on your Control Machine.
 ```
 pip3 install ansible
 ```
-2. Install ubunutu desktop on box1 enable ssh and add the ansible runner account
+2. Setup Control Machine
+Install Ansible Galaxy collections (Options 1)
+Install Google Cloud SDK on your Control Machine (Options 2)
+Initialise Google Cloud Login on your Control Machine (Option 3
+```
+./run 
+```
+3. Deploy Anthos Workstation/Box1/Proxy 
+ 
+Install ubuntu desktop minimal on box1 enable ssh and add the ansible runner account with passwordless sudo. 
 ```
 sudo apt update -y  && sudo apt install openssh-server -y
 sudo ufw allow openssh
@@ -19,22 +28,37 @@ cat <<EOF | sudo tee /etc/sudoers.d/00-ansible-runner
 ansible-runner   ALL=(ALL) NOPASSWD:ALL
 EOF
 ```
-3. Install ubunutu server on box2 and box3 enable ssh and add the ansible runner account as above.
-
-4. Create ssh key pair and copy public key to target hosts
+Create ssh key pair and copy public key to box1
 ```
 ssh-copy-id -i ~/.ssh/id_ed25519.pub ansible-runner@<host>
 ```
-5. Connect to your local wifi and configure static IP for your pysical ethernet  (10.1.1.10)
-
-6. Update variables
-
-7. Execute run script
+Configure static IP for private network interface on box1
+Update ansible variables 
+Install Anthos Workstation (Option 4) 
+	```
+./run 
 ```
-./run
+4. Deploy Anthos Cluster
+Install ubunutu server on box2 and box3 enable ssh and add the ansible runner account as above.
+```
+sudo apt update -y  && sudo apt install openssh-server -y
+sudo ufw allow openssh
+sudo adduser ansible-runner
+sudo rm -f /etc/sudoers.d/*
+cat <<EOF | sudo tee /etc/sudoers.d/00-ansible-runner
+ansible-runner   ALL=(ALL) NOPASSWD:ALL
+EOF
+```
+Create ssh key pair and copy public key to box2 & box 3
+```
+ssh-copy-id -i ~/.ssh/id_ed25519.pub ansible-runner@<host>
+```
+Install Anthos Cluster (Option 5) 
+```
+./run 
 ```
 
-The following digram shows my environment
+Arhictecture:
 
 ```ditaa {cmd=true args=["-E"]}
 +--------------------------+    +-------------------------------+
