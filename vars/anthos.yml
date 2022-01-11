@@ -46,7 +46,7 @@ ansible_ssh_private_key_file: ~/.ssh/id_ed25519
 #--------------------------------------------------------------------
 # "bmctl" Configuration
 #--------------------------------------------------------------------
-bmctl_version: "1.9.0"
+bmctl_version: "1.10.0"
 
 login_user: "anthos"
 
