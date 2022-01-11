@@ -20,7 +20,7 @@
     src: "{{ ansible_user_dir }}/../{{ login_user }}/.ssh/id_rsa.pub"
   register: out
   become: true
-  delegate_to: "{{ target_workstation }}"
+  delegate_to: "{{ box1_public_address }}"
 
 - name: Write to SSH Authorized Keys
   vars:
@@ -29,4 +29,5 @@
     destfile: "{{ ansible_user_dir }}/../{{ login_user }}/.ssh/authorized_keys"
     regexp: "{{ pubkey.split()[2] }}$"
     line: "{{ pubkey }}"
+    state: present
   become: true
