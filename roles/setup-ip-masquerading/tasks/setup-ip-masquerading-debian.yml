@@ -31,11 +31,8 @@
     dest: /etc/ufw/before.rules
     block: "{{ lookup('template', 'roles/setup-ip-masquerading/templates/before.rules.j2') }}"
     backup: yes
+  notify:
+    - Disable UFW
+    - Start UFW
+  
 
-- name: Disable UFW
-  community.general.ufw:
-    state: disabled
-
-- name: Start UFW
-  community.general.ufw:
-    state: enabled

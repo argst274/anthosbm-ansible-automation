@@ -45,6 +45,16 @@
     - role: setup-login-user
     - role: setup-isc-dhcp-server
     - role: setup-ip-masquerading
+  handlers:
+    - name: Disable UFW
+      ansible.builtin.service: 
+        name: ufw
+        state: disabled
+      
+    - name: Start UFW
+      ansible.builtin.service:
+        name: ufw
+        state: enabled
 
 - name: Setup the Anthos Workstation as "login_user"
   hosts: "{{ target_workstation }}"
@@ -58,3 +68,4 @@
     - role: setup-kubectl
     - role: setup-bmctl
     - role: setup-docker
+
