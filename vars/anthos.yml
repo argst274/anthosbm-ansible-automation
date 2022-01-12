@@ -75,3 +75,9 @@ container_runtime: "containerd"
 control_plane_vip: 10.1.1.30
 ingress_vip: 10.1.1.31
 loadbalancer_address_pool: 10.1.1.31-10.1.1.50
+
+#--------------------------------------------------------------------
+# Kubernetes Configuration
+#--------------------------------------------------------------------
+# Kubernetes Service Account (KSA) name
+KSA_NAME: "abm-console-service-account"

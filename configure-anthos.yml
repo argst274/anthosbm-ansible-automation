@@ -14,11 +14,26 @@
 
 
 #--------------------------------------------------------------------
-# Ansible Galaxy Requirements List
+# Playbook to Create Anthos Cluster
 #--------------------------------------------------------------------
 
 ---
-collections:
-  - community.general
-  - google.cloud
-  - kubernetes.core
+
+- name: Prepare the Anthos Workstation
+  hosts: "{{ target_workstation }}"
+  remote_user: "{{ ansible_service_account }}"
+  vars_files:
+    - vars/anthos.yml
+  roles:
+    - role: system-package-update
+    - role: setup-pip-dependencies
+    - role: setup-k8s-collection-dependencies
+
+- name: Configure the Anthos Kubernetes Cluster
+  hosts: "{{ target_workstation }}"
+  remote_user: "{{ login_user }}"
+  vars_files:
+    - vars/anthos.yml
+  roles:
+    - role: create-kubernetes-service-account
+
