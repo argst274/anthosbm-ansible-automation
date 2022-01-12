@@ -12,16 +12,22 @@
 
 ---
 
-- name: Create a Deployment by reading the definition from a local file
+- name: Create cloud-console-reader role
   kubernetes.core.k8s:
     state: present
-    src: cloud-console-reader.yaml
+    template: 'cloud-console-reader-role.yaml'
 
-- name: Read definition template file from the Ansible controller file system
+- name: Bind view & cloud-console-reader to KSA
   kubernetes.core.k8s:
     state: present
-    template: 'cloud-console-reader.yaml'
-    kubeconfig: bmctl-workspace/nucs/nucs-kubeconfig
+    template: 
+      - 'cloud-console-reader-binding.yaml' 
+      - 'cloud-console-view-binding.yaml'
+
+- name: Create Kubernetes Service Account (KSA)
+  kubernetes.core.k8s:
+    state: present
+    template: 'create-ksa.yaml'
 
 - name: Add KUBECONFIG Environment Variable to ".bashrc"
   ansible.builtin.lineinfile:
@@ -36,65 +42,6 @@
     owner: "{{ login_user }}"
     group: "{{ login_user }}"
     state: link
-
-- name: Create Kubernetes service account
-  ansible.builtin.shell:
-    cmd: |
-      set -o pipefail
-      kubectl create serviceaccount {{ KSA_NAME }}
-  args:
-    executable: /bin/bash
-  register: create_ksa
-  failed_when: false
-  changed_when: false
-
-- name: Check the Previous Task
-  ansible.builtin.debug:
-    msg: "{{ create_ksa.stdout_lines + create_ksa.stderr_lines }}"
-  when:
-    - create_ksa.stdout_lines is defined
-    - create_ksa.stderr_lines is defined
-
-- name: Create cluster role binding for KSA to cloud-console-reader
-  ansible.builtin.shell:
-    cmd: |
-      set -o pipefail
-      kubectl create clusterrolebinding cloud-console-reader-binding \
-      --clusterrole cloud-console-reader \
-      --serviceaccount default:{{ KSA_NAME }}
-  args:
-    executable: /bin/bash
-  register: create_crb
-  failed_when: false
-  changed_when: false
-
-- name: Check the Previous Task
-  ansible.builtin.debug:
-    msg: "{{ create_crb.stdout_lines + create_crb.stderr_lines }}"
-  when:
-    - create_crb.stdout_lines is defined
-    - create_crb.stderr_lines is defined
-
-- name: Create cluster role binding for KSA to cloud-console-view
-  ansible.builtin.shell:
-    cmd: |
-      set -o pipefail
-      kubectl create clusterrolebinding cloud-console-view-binding \
-      --clusterrole view \
-      --serviceaccount default:{{ KSA_NAME }}
-  args:
-    executable: /bin/bash
-  register: create_crb
-  failed_when: false
-  changed_when: false
-
-- name: Check the Previous Task
-  ansible.builtin.debug:
-    msg: "{{ create_crb.stdout_lines + create_crb.stderr_lines }}"
-  when:
-    - create_crb.stdout_lines is defined
-    - create_crb.stderr_lines is defined
-
 
 - name: Obtain the bear token for KSA
   ansible.builtin.shell:
@@ -114,9 +61,7 @@
 
 - name: Output Google Cloud Anthos Authenticaion Token
   ansible.builtin.debug:
-    msg: "Copy the following token and paste into Google Anthos web console: {{ create_token.stdout_lines + create_token.stderr_lines }}"
+    msg: "{{ create_token.stdout_lines + create_token.stderr_lines }}"
   when:
-    - create_crb.stdout_lines is defined
-    - create_crb.stderr_lines is defined
-
-
+    - create_token.stdout_lines is defined
+    - create_token.stderr_lines is defined
