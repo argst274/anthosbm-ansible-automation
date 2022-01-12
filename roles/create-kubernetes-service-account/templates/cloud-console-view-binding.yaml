@@ -4,9 +4,9 @@ metadata:
   name: cloud-console-view-binding
   namespace: default
 subjects:
-- kind: User
+- kind: ServiceAccount
   name: {{ KSA_NAME }}
-  apiGroup: rbac.authorization.k8s.io
+  namespace: default
 roleRef:
   kind: ClusterRole
   name: view
