@@ -4,7 +4,7 @@
 
 #This demo is only built for Ubuntu hosts
 
-Arhictecture:
+Architecture:
 
 ```ditaa {cmd=true args=["-E"]}
 +--------------------------+    +-------------------------------+
@@ -39,7 +39,7 @@ Initialise Google Cloud Login on your Control Machine (Option 3
 ```
 ./run 
 ```
-3. Deploy Anthos Workstation/Box1/Proxy 
+3. Deploy Anthos Workstation/Box1/Proxy - 
  
 Install ubuntu desktop minimal on box1 enable ssh and add the ansible runner account with passwordless sudo. 
 ```
@@ -61,7 +61,7 @@ install Anthos Workstation (Option 4)
 ```
 ./run 
 ```
-4. Deploy Anthos Cluster
+4. Deploy Anthos Cluster - 
 Install ubunutu server on box2 and box3 enable ssh and add the ansible runner account as above.
 ```
 sudo apt update -y  && sudo apt install openssh-server -y
