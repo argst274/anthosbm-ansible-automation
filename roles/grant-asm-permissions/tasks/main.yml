@@ -14,7 +14,7 @@
 
 ---
 
-- name: Grant ASM Roles Required for the Ansible Google Cloud Service Account
+- name: Grant ASM Roles Required for the Ansible Service Account
   ansible.builtin.shell:
     cmd: |
       set -o pipefail
