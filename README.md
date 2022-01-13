@@ -10,8 +10,8 @@
 pip3 install ansible
 ```
 2. Setup Control Machine
-Install Ansible Galaxy collections (Options 1)
-Install Google Cloud SDK on your Control Machine (Options 2)
+Install Ansible Galaxy collections (Options 1),
+Install Google Cloud SDK on your Control Machine (Options 2), and
 Initialise Google Cloud Login on your Control Machine (Option 3
 ```
 ./run 
@@ -35,7 +35,7 @@ ssh-copy-id -i ~/.ssh/id_ed25519.pub ansible-runner@<host>
 Configure static IP for private network interface on box1
 Update ansible variables 
 Install Anthos Workstation (Option 4) 
-	```
+```
 ./run 
 ```
 4. Deploy Anthos Cluster
