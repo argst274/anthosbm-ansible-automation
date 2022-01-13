@@ -28,7 +28,7 @@
   failed_when: false
   changed_when: false
 
-- name: asmcli validate output
+- name: asmcli install output
   ansible.builtin.debug:
     msg: "{{ asmcli_install.stdout_lines + asmcli_install.stderr_lines }}"
   when:
