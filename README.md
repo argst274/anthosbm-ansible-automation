@@ -4,6 +4,29 @@
 
 #This demo is only built for Ubuntu hosts
 
+Arhictecture:
+
+```ditaa {cmd=true args=["-E"]}
++--------------------------+    +-------------------------------+
+| Chromebook               |    |Ubuntu 20.10 Desktop           |
+| Ansible Control Machine  +--->|Box1/Anthos Workstation/Proxy  |
+| wlan: 192.168.1.XX       |    |wlan: 192.168.1.13 (Static)    |
+|                          |    |eth:  10.1.1.10 (Static)       |
++--------------------------+    +---------------+---------------+
+                                                |
+                                         +------v-----+
+                                         | eth switch |
+                           +-------------+------------+-------------+
+                           |                                        |
+                           |                                        |
+                           |                                        |
+           +---------------v---------------+       +----------------v--------------+
+           |Ubuntu 20.10 Server            |       |Ubuntu 20.10 Server            |
+           |Box2/Anthos Cluster            |       |Box3/Anthos Cluster            |
+           |eth:  10.1.1.11 (DHCP)         |       |eth:  10.1.1.12 (DHCP)         |
+           |                               |       |                               |
+           +-------------------------------+       +-------------------------------+
+  ```
 
 1. Install the latest version of Ansible on your Control Machine.
 ```
@@ -58,29 +81,6 @@ Install Anthos Cluster (Option 5)
 ./run 
 ```
 
-Arhictecture:
-
-```ditaa {cmd=true args=["-E"]}
-+--------------------------+    +-------------------------------+
-| Chromebook               |    |Ubuntu 20.10 Desktop           |
-| Ansible Control Machine  +--->|Box1/Anthos Workstation/Proxy  |
-| wlan: 192.168.1.XX       |    |wlan: 192.168.1.13 (Static)    |
-|                          |    |eth:  10.1.1.10 (Static)       |
-+--------------------------+    +---------------+---------------+
-                                                |
-                                         +------v-----+
-                                         | eth switch |
-                           +-------------+------------+-------------+
-                           |                                        |
-                           |                                        |
-                           |                                        |
-           +---------------v---------------+       +----------------v--------------+
-           |Ubuntu 20.10 Server            |       |Ubuntu 20.10 Server            |
-           |Box2/Anthos Cluster            |       |Box3/Anthos Cluster            |
-           |eth:  10.1.1.11 (DHCP)         |       |eth:  10.1.1.12 (DHCP)         |
-           |                               |       |                               |
-           +-------------------------------+       +-------------------------------+
-  ```
 
   Troubleshooting
   - Ensure that constraints/iam.disableServiceAccountKeyCreation policy is not enforced
