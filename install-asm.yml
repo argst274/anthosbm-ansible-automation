@@ -19,14 +19,15 @@
 
 ---
 
-# - name: Configure ASM Dependencies
-#   hosts: "{{ target_workstation }}"
-#   remote_user: "{{ ansible_service_account }}"
-#   vars_files:
-#     - vars/anthos.yml
-#   roles:
- #   - role: system-package-update
- #   - role: setup-jq
+- name: Configure ASM Dependencies
+  hosts: "{{ target_workstation }}"
+  remote_user: "{{ ansible_service_account }}"
+  vars_files:
+    - vars/anthos.yml
+  roles:
+    - role: system-package-update
+    - role: setup-jq
+    - role: setup-asmcli
 
 - name: Prepare the Google Cloud Project for ASM
   hosts: localhost
@@ -34,6 +35,7 @@
   vars_files:
     - vars/anthos.yml
   roles:
+    - role: enable-anthos-services
     - role: grant-asm-permissions
 
 - name: Install Anthos Service Mesh
@@ -42,5 +44,6 @@
   vars_files:
     - vars/anthos.yml
   roles:
-    - role: setup-asmcli
+    - role: asmcli-validate
+
 
