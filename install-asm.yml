@@ -45,5 +45,6 @@
     - vars/anthos.yml
   roles:
     - role: asmcli-validate
+    - role: asmcli-install
 
 
