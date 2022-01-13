@@ -54,16 +54,16 @@ gcp_keys_dir: "{{ ansible_user_dir }}/.gcp_keys"
 bmctl_workspace_dir: "{{ ansible_user_dir }}/bmctl-workspace"
 
 # Cluster name: The name the Anthos Cluster will be registered with on GCP
+cluster_name: "nucs"
 # Cluster type. This can be:
 #   1) admin:      to create an admin cluster. This can later be used to create user clusters.
 #   2) user:       to create a user cluster. Requires an existing admin cluster.
 #   3) hybrid:     to create a hybrid cluster that runs admin cluster components and user workloads.
 #   4) standalone: to create a cluster that manages itself, runs user workloads, but does not manage other clusters.
+cluster_type: "standalone"
 # Cluster profile. This can be:
 #   1) default: The default profile has limited resource requirements.
 #   2) edge:    The edge profile minimizes the resource consumption of Anthos clusters on bare metal. It is only available for standalone clusters.
-cluster_name: "nucs"
-cluster_type: "standalone"
 # cluster_profile: "default"
 cluster_location: "australia-southeast1"
 
@@ -81,3 +81,8 @@ loadbalancer_address_pool: 10.1.1.31-10.1.1.50
 #--------------------------------------------------------------------
 # Kubernetes Service Account (KSA) name
 KSA_NAME: "abm-console-service-account"
+
+#--------------------------------------------------------------------
+# Antrhos Service Mesh Cli
+#--------------------------------------------------------------------
+asmctl_version: "1.12"

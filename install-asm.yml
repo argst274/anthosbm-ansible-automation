@@ -24,7 +24,6 @@
 #   remote_user: "{{ ansible_service_account }}"
 #   vars_files:
 #     - vars/anthos.yml
-#     - vars/asm.yml
 #   roles:
  #   - role: system-package-update
  #   - role: setup-jq
@@ -42,7 +41,6 @@
   remote_user: "{{ login_user }}"
   vars_files:
     - vars/anthos.yml
-    - vars/asm.yml
   roles:
     - role: setup-asmcli
 
