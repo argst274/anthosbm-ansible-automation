@@ -35,7 +35,7 @@
   vars_files:
     - vars/anthos.yml
   roles:
-    - role: enable-anthos-services
+    - role: enable-asm-services
     - role: grant-asm-permissions
 
 - name: Install Anthos Service Mesh

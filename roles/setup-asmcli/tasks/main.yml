@@ -21,9 +21,3 @@
     dest: /usr/sbin/asmcli
     mode: '755'
   become: true
-
-- name: cluster admin binding for anisble-runner gcp account
-  kubernetes.core.k8s:
-    state: present
-    template: 'cluster-admin-binding.yaml'
-
