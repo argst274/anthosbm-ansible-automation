@@ -32,9 +32,9 @@ Create ssh key pair and copy public key to box1
 ```
 ssh-copy-id -i ~/.ssh/id_ed25519.pub ansible-runner@<host>
 ```
-Configure static IP for private network interface on box1
-Update ansible variables 
-Install Anthos Workstation (Option 4) 
+Configure static IP for private network interface on box1,
+update ansible variables file and
+install Anthos Workstation (Option 4) 
 ```
 ./run 
 ```
