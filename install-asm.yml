@@ -48,4 +48,4 @@
   roles:
     - role: asmcli-validate
     - role: asmcli-install
-#    - role: install-asm-gateway
+    - role: install-asm-gateway

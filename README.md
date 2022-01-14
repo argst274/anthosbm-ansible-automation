@@ -1,8 +1,9 @@
 # Ansible Automation for Installing Anthos Bare Metal Intel Nuc Demo 
 
-#Shout out to Matthew Winter whos code set the foundation for this deployment
+#Big shout out to @winterlabs-dev whos code set the foundation for this deployment
 
-#This demo is only built for Ubuntu hosts
+- This demo is only built for Ubuntu hosts
+- Ensure that constraints/iam.disableServiceAccountKeyCreation policy is not enforced
 
 Architecture:
 
@@ -76,11 +77,7 @@ Create ssh key pair and copy public key to box2 & box 3
 ```
 ssh-copy-id -i ~/.ssh/id_ed25519.pub ansible-runner@<host>
 ```
-Install Anthos Cluster (Option 5) 
+Install Anthos Cluster (Option 5), Configure Anthos for Cloud Console (Option 6), and Install Anthos Service (Option 7) Mesh" 
 ```
 ./run 
 ```
-
-
-  Troubleshooting
-  - Ensure that constraints/iam.disableServiceAccountKeyCreation policy is not enforced

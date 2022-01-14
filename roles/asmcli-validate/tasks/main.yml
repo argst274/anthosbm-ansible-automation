@@ -29,7 +29,7 @@
       asmcli validate \
         --kubeconfig {{ bmctl_workspace_dir }}/{{ cluster_name }}/{{ cluster_name }}-kubeconfig \
         --fleet_id {{ gcp_project_id }}\
-        --output_dir ~/asm-install-package \
+        --output_dir {{ asmcli_outputdir }} \
         --platform multicloud
   args:
     executable: /bin/bash

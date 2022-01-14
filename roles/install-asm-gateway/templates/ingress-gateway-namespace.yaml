@@ -1,4 +1,6 @@
 kind: Namespace
 apiVersion: v1
 metadata:
-  name: ingress-gateway
+  name: {{ ingress_namespace }}
+  labels: 
+    istio.io/rev: {{ istio_version.stdout }}

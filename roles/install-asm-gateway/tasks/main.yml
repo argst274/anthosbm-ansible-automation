@@ -12,7 +12,47 @@
 
 ---
 
+- name: Get the revision label on istiod
+  ansible.builtin.shell:
+    cmd: |
+      set -o pipefail
+      kubectl get deploy -n istio-system -l app=istiod -o \
+      jsonpath={.items[*].metadata.labels.'istio\.io\/rev'}'{"\n"}'
+  args:
+    executable: /bin/bash
+  register: istio_version
+
+- name: Check the Previous Task
+  ansible.builtin.debug:
+    msg: "{{ istio_version.stdout_lines + istio_version.stderr_lines }}"
+  failed_when: istio_version.rc != 0
+  when:
+    - istio_version.stdout_lines is defined
+    - istio_version.stderr_lines is defined
+
 - name: Create gateway namespace
   kubernetes.core.k8s:
     state: present
     template: 'ingress-gateway-namespace.yaml'
+  when: istio_version.rc == 0
+
+- name: Deploy ingress Gateway - Role
+  kubernetes.core.k8s:
+    state: present
+    namespace: '{{ ingress_namespace }}'
+    src: '{{ asmcli_outputdir }}/samples/gateways/istio-ingressgateway/role.yaml'
+- name: Deploy ingress Gateway - Service Account
+  kubernetes.core.k8s:
+    state: present
+    namespace: '{{ ingress_namespace }}'
+    src: '{{ asmcli_outputdir }}/samples/gateways/istio-ingressgateway/serviceaccount.yaml'
+- name: Deploy ingress Gateway - Deployment
+  kubernetes.core.k8s:
+    state: present
+    namespace: '{{ ingress_namespace }}'
+    src: '{{ asmcli_outputdir }}/samples/gateways/istio-ingressgateway/deployment.yaml'
+- name: Deploy ingress Gateway - Service
+  kubernetes.core.k8s:
+    state: present
+    namespace: '{{ ingress_namespace }}'
+    src: '{{ asmcli_outputdir }}/samples/gateways/istio-ingressgateway/service.yaml'
