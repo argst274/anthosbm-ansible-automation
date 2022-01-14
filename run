@@ -11,6 +11,8 @@ OPTIONS=(
   "Initialise  - Google Cloud Login"
   "Install     - Create Anthos Workstation"
   "Install     - Create Anthos Cluster"
+  "Configure   - Anthos for Cloud Console"
+  "Install     - Anthos Service Mesh"
 )
 
 PS3='Select an operation: '
@@ -42,6 +44,15 @@ do
     "Install     - Create Anthos Cluster")
       ansible-playbook create-anthos-cluster.yml
       ;;
+    
+    "Configure   - Anthos for Cloud Console")
+      ansible-playbook configure-anthos.yml
+      ;;
+
+    "Install     - Anthos Service Mesh")
+      ansible-playbook install-asm.yml
+      ;;
+
 
     *)
       echo "Invalid option '${OPT}'"

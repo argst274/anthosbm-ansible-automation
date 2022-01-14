@@ -28,6 +28,8 @@
     - role: system-package-update
     - role: setup-jq
     - role: setup-asmcli
+    - role: setup-pip-dependencies
+    - role: setup-k8s-collection-dependencies
 
 - name: Prepare the Google Cloud Project for ASM
   hosts: localhost
