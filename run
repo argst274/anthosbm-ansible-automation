@@ -52,8 +52,6 @@ do
     "Install     - Anthos Service Mesh")
       ansible-playbook install-asm.yml
       ;;
-
-
     *)
       echo "Invalid option '${OPT}'"
       ;;
