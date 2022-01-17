@@ -12,6 +12,20 @@
 
 ---
 
+- name: Add KUBECONFIG Environment Variable to ".bashrc"
+  ansible.builtin.lineinfile:
+    path: "./.bashrc"
+    regexp: "^export KUBECONFIG="
+    line: "export KUBECONFIG=\"{{ bmctl_workspace_dir }}/{{ cluster_name }}/{{ cluster_name }}-kubeconfig\""
+
+- name: Create a symbolic link in .kube config
+  ansible.builtin.file:
+    src: "{{ bmctl_workspace_dir }}/{{ cluster_name }}/{{ cluster_name }}-kubeconfig"
+    dest: "./.kube/config"
+    owner: "{{ login_user }}"
+    group: "{{ login_user }}"
+    state: link
+
 - name: Create Kubernetes Service Account (KSA)
   kubernetes.core.k8s:
     state: present
@@ -28,20 +42,6 @@
     template: 
       - 'cloud-console-reader-binding.yaml' 
       - 'cloud-console-view-binding.yaml'
-
-- name: Add KUBECONFIG Environment Variable to ".bashrc"
-  ansible.builtin.lineinfile:
-    path: "./.bashrc"
-    regexp: "^export KUBECONFIG="
-    line: "export KUBECONFIG=\"{{ bmctl_workspace_dir }}/{{ cluster_name }}/{{ cluster_name }}-kubeconfig\""
-
-- name: Create a symbolic link in .kube config
-  ansible.builtin.file:
-    src: "{{ bmctl_workspace_dir }}/{{ cluster_name }}/{{ cluster_name }}-kubeconfig"
-    dest: "./.kube/config"
-    owner: "{{ login_user }}"
-    group: "{{ login_user }}"
-    state: link
 
 - name: Obtain the bear token for KSA
   ansible.builtin.shell:
