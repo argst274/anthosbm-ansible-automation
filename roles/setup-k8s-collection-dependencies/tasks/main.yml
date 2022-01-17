@@ -12,20 +12,12 @@
 
 ---
 
-- name: Install anisble kubernetes dependencies k8s package
-  pip:
-    name: 
-      - kubernetes 
-
-- name: Install anisble kubernetes dependencies PyYAML package
-  pip:
-    name:  
-      - PyYAML
-- name: Install anisble kubernetes dependencies jsonpatch package
-  pip:
-    name:  
-      - jsonpatch
-- name: Install anisble kubernetes dependencies setuptools package
-  pip:
-    name:        
-      - setuptools
+- name: Install anisble kubernetes.core.k8s dependencies 
+  ansible.builtin.pip:
+    name: "{{ item }}"
+  with_items:
+    - kubernetes
+    - PyYAML
+    - jsonpatch
+    - setuptools
+  become: true
