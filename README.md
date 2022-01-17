@@ -36,7 +36,7 @@ pip3 install ansible
 2. Setup Control Machine
 Install Ansible Galaxy collections (Options 1),
 Install Google Cloud SDK on your Control Machine (Options 2), and
-Initialise Google Cloud Login on your Control Machine (Option 3
+Initialise Google Cloud Login on your Control Machine (Option 3)
 ```
 ./run 
 ```
@@ -57,16 +57,14 @@ Create ssh key pair and copy public key to box1
 ssh-copy-id -i ~/.ssh/id_ed25519.pub ansible-runner@<host>
 ```
 Configure static IP for private network interface on box1,
-update ansible variables file and
+update ansible hosts/variables and
 install Anthos Workstation (Option 4) 
 ```
 ./run 
 ```
 4. Deploy Anthos Cluster - 
-Install ubunutu server on box2 and box3 enable ssh and add the ansible runner account as above.
+Install ubunutu server on box2 and box3 enable ssh and configure the ansible runner account as above.
 ```
-sudo apt update -y  && sudo apt install openssh-server -y
-sudo ufw allow openssh
 sudo adduser ansible-runner
 sudo rm -f /etc/sudoers.d/*
 cat <<EOF | sudo tee /etc/sudoers.d/00-ansible-runner
