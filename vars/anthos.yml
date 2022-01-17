@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Make sure you update the target hosts IP addresses (specifical the public address of box1),
+# gcp_project_id and confirm your ansible_ssh_private_key, 
+# other values can be left as default
 
 #--------------------------------------------------------------------
 # Target Hosts
@@ -27,7 +30,7 @@ box3_private_address: 10.1.1.12
 #--------------------------------------------------------------------
 # Google Cloud Project Configuration
 #--------------------------------------------------------------------
-gcp_project_id: "anthos-demo-316407"
+gcp_project_id: "anthos-take-847"
 
 ansible_service_account: "ansible-runner" #Length between 6-30
 
@@ -90,4 +93,3 @@ asmcli_outputdir: "{{ ansible_user_dir }}/asm-install-package"
 
 # Ingress Gateway Namesapce 
 ingress_namespace: ingress-gateway
-
