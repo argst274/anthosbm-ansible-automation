@@ -1,6 +1,6 @@
-# Ansible Automation for Installing Anthos Bare Metal Intel Nuc Demo 
+#Ansible Automation for Installing Anthos Bare Metal Intel Nuc Demo 
 
-# Big shout out to @winterlabs-dev whos code set the foundation for this deployment
+#Big shout out to @winterlabs-dev whos code set the foundation for this deployment
 
 - This demo is only built for Ubuntu hosts
 - Ensure that constraints/iam.disableServiceAccountKeyCreation policy is not enforce
@@ -64,9 +64,9 @@ install Anthos Workstation (Option 4)
 ```
 4. Deploy Anthos Cluster - 
 Install ubunutu server on box2 and box3 enable ssh and configure the ansible runner account as above.
-# Be sure to use the entire disk space or the anthos preflight checks will fail on free space.
-# Alternativly extend the partiion to the entire drives with the following commands `sudo lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv`
-# Followed by `resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv`
+#Be sure to use the entire disk space or the anthos preflight checks will fail on free space.
+#Alternativly extend the partiion to the entire drives with the following commands `sudo lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv`
+#Followed by `resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv`
 ```
 sudo adduser ansible-runner
 sudo rm -f /etc/sudoers.d/*
