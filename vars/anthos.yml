@@ -93,3 +93,6 @@ asmcli_outputdir: "{{ ansible_user_dir }}/asm-install-package"
 
 # Ingress Gateway Namesapce 
 ingress_namespace: ingress-gateway
+
+#Anthos Service Mesh Service Account
+anthos_service_mesh_service_account: "anthos-service-mesh"

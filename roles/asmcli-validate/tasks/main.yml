@@ -12,7 +12,7 @@
 
 ---
 
-- name: Create cluster admin binding for anisble-runner GCP account
+- name: Create cluster admin binding for ASM service account GCP account
   kubernetes.core.k8s:
     state: present
     template: 'cluster-admin-binding.yaml'
@@ -30,7 +30,9 @@
         --kubeconfig {{ bmctl_workspace_dir }}/{{ cluster_name }}/{{ cluster_name }}-kubeconfig \
         --fleet_id {{ gcp_project_id }}\
         --output_dir {{ asmcli_outputdir }} \
-        --platform multicloud
+        --platform multicloud \
+        --service-account {{ anthos_service_mesh_service_account }}@{{ gcp_project_id }}.iam.gserviceaccount.com \
+        --key-file {{ gcp_keys_dir }}/{{ anthos_service_mesh_service_account }}.json
   args:
     executable: /bin/bash
   register: asmcli_validate

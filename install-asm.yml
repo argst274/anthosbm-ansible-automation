@@ -38,7 +38,7 @@
     - vars/anthos.yml
   roles:
     - role: enable-asm-services
-    - role: grant-asm-permissions
+    - role: create-asm-service-account
 
 - name: Install Anthos Service Mesh
   hosts: "{{ target_workstation }}"
@@ -46,6 +46,7 @@
   vars_files:
     - vars/anthos.yml
   roles:
+    - role: copy-asm-service-account-key
     - role: asmcli-validate
     - role: asmcli-install
     - role: install-asm-gateway

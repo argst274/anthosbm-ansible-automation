@@ -21,7 +21,9 @@
         --fleet_id {{ gcp_project_id }}\
         --output_dir {{ asmcli_outputdir }} \
         --platform multicloud \
-        --ca mesh_ca
+        --ca mesh_ca \
+        --service-account {{ anthos_service_mesh_service_account }}@{{ gcp_project_id }}.iam.gserviceaccount.com \
+        --key-file {{ gcp_keys_dir }}/{{ anthos_service_mesh_service_account }}.json
   args:
     executable: /bin/bash
   register: asmcli_install

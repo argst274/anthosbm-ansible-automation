@@ -4,7 +4,7 @@ metadata:
   name: cluster-admin-binding
 subjects:
 - kind: User
-  name: {{ ansible_service_account }}@{{ gcp_project_id }}.iam.gserviceaccount.com
+  name: {{ anthos_service_mesh_service_account }}@{{ gcp_project_id }}.iam.gserviceaccount.com
   apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: ClusterRole
