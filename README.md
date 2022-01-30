@@ -1,6 +1,6 @@
 #Ansible Automation for Installing Anthos Bare Metal Intel Nuc Demo 
 
-#Big shout out to @winterlabs-dev whos code set the foundation for this deployment
+#Big shout out to @wintermi whos code set the foundation for this deployment
 #Googlers go/anthosbm-jedi
 
 - This demo is only built for Ubuntu hosts
